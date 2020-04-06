@@ -14,6 +14,7 @@ def handleonetxtfile(inpname):
     basename = os.path.basename(inpname).split('.')[0]
     basename_txt = os.path.join(basename+".txt")
     outname = os.path.join(basename+"_setnence_converted.txt")
+    tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
     fp = open(basename_txt)
     data = fp.read()
     paragraphs = [p for p in data.split('\n') if p]
