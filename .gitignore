@@ -25,6 +25,7 @@ share/python-wheels/
 re-outputs*/
 datasets/
 models/
+model*/
 *.egg-info/
 .installed.cfg
 *.egg
