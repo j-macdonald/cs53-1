@@ -1,23 +1,19 @@
 #!/bin/bash
 
-export BIOASQ_DIR=datasets/QA/BioASQ
-export SQUAD_VERSION=v1.1
+mkdir -p datasets/QA
+
+gdown --id 1-KzAQzaE-Zd4jOlZG_7k7D4odqPI3dL1 -O datasets/QA/bioasq67.zip
+unzip datasets/QA/bioasq67.zip -d datasets/QA/
+
+export BIOASQ_DIR=datasets/QA/BioASQ-6b
+export SQUAD_VERSION=v2.0
 export ALBERT_DIR=../large-albert
-export OUTPUT_DIR=bioasq_out
+export OUTPUT_DIR=bioasq_out_factoid
 mkdir -p $OUTPUT_DIR
 
-#export DFILENAME=BioASQ-train-factoid-6b-snippet-2sent.json
-export DFILENAME=BioASQ-train-factoid-4b.json
-#export PREDICT_FILE=${BIOASQ_DIR}/BioASQ-train-factoid-5b.json
-export PREDICT_FILE=${BIOASQ_DIR}/BioASQ-train-factoid-5b.json
+export DFILENAME=train/Appended-Snippet/BioASQ-train-factoid-6b-snippet-2sent.json
+export PREDICT_FILE=${BIOASQ_DIR}/train/Snippet-as-is/BioASQ-train-factoid-6b.json
 
-# gdown --id 1xADTTjwTogFmnhNU3EPJ86slykoSL4L7 -O large.zip
-# unzip large.zip
-
-# setenv PYTHONPATH /home/562/sr1770/.local/lib/python3.7/site-packages
-
-# module load python3
-conda activate dspy
 
 python run_factoid.py \
        --albert_config_file=${ALBERT_DIR}/assets/albert_config.json \

@@ -920,7 +920,7 @@ def main(_):
 
   albert_config = modeling.AlbertConfig.from_json_file(FLAGS.albert_config_file)
 
-  validate_flags_or_throw(albert_config)
+  #validate_flags_or_throw(albert_config)
 
   tf.gfile.MakeDirs(FLAGS.output_dir)
 
