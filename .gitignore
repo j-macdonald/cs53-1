@@ -24,6 +24,7 @@ pip-wheel-metadata/
 share/python-wheels/
 re-outputs*/
 datasets/
+models/
 *.egg-info/
 .installed.cfg
 *.egg
