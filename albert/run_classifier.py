@@ -155,6 +155,7 @@ def main(_):
       "qqp": classifier_utils.QqpProcessor,
       "qnli": classifier_utils.QnliProcessor,
       "wnli": classifier_utils.WnliProcessor,
+      "re": classifier_utils.REProcessor,
   }
 
   if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
@@ -354,6 +355,9 @@ def main(_):
       key_name = "pearson"
     elif task_name == "cola":
       key_name = "matthew_corr"
+    elif task_name == "re":
+      key_name = "matthew_corr"
+    
     else:
       key_name = "eval_accuracy"
 

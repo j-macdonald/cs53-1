@@ -19,7 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 import re
-import lamb_optimizer
+#import lamb_optimizer
 import six
 from six.moves import zip
 import tensorflow.compat.v1 as tf
@@ -71,6 +71,7 @@ def create_optimizer(loss, init_lr, num_train_steps, num_warmup_steps, use_tpu,
   # As report in the Bert pulic github, the learning rate for SQuAD 1.1 finetune
   # is 3e-5, 4e-5 or 5e-5. For LAMB, the users can use 3e-4, 4e-4,or 5e-4 for a
   # batch size of 64 in the finetune.
+  optimizer = "adamw"
   if optimizer == "adamw":
     tf.logging.info("using adamw")
     optimizer = AdamWeightDecayOptimizer(
