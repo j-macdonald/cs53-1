@@ -1218,7 +1218,7 @@ def main(_):
         seq_length=FLAGS.max_seq_length,
         is_training=True,
         drop_remainder=True)
-    estimator.train(input_fn=train_input_fn, max_steps=num_train_steps)
+    estimator.train(input_fn=train_input_fn, steps=num_train_steps)
 
   if FLAGS.do_predict:
     eval_examples = read_squad_examples(
