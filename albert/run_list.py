@@ -673,15 +673,15 @@ def model_fn_builder(albert_config, init_checkpoint, learning_rate,
           total_loss, learning_rate, num_train_steps, num_warmup_steps, use_tpu)
 
       # https://github.com/google-research/albert/issues/70#issuecomment-436533131
-      logging_hook = tf.train.LoggingTensorHook(
-          tensors={"loss": total_loss}, every_n_iter=100)
+      # logging_hook = tf.train.LoggingTensorHook(
+      #     tensors={"loss": total_loss}, every_n_iter=100)
 
       output_spec = tf.contrib.tpu.TPUEstimatorSpec(
           mode=mode,
           loss=total_loss,
           train_op=train_op,
-          scaffold_fn=scaffold_fn,
-          training_hooks=[logging_hook])
+          scaffold_fn=scaffold_fn)#,
+          #training_hooks=[logging_hook])
     elif mode == tf.estimator.ModeKeys.PREDICT:
       predictions = {
           "unique_ids": unique_ids,
