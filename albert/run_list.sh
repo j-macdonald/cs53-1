@@ -17,6 +17,7 @@ python run_list.py \
        --train_file=${BIOASQ_DIR}${DFILENAME} \
        --predict_file=${PREDICT_FILE} \
        --vocab_file=${ALBERT_DIR}/assets/30k-clean.vocab \
+       --spm_model_file=${ALBERT_DIR}/assets/30k-clean.model \
        --do_train=True \
        --do_predict=True \
        --train_batch_size=8 \
