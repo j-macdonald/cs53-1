@@ -1363,7 +1363,7 @@ def main(_):
 
   if FLAGS.do_predict:
     eval_examples = read_squad_examples(
-        input_file=FLAGS.predict_file, is_training=False)[:50]
+        input_file=FLAGS.predict_file, is_training=False)
 
     eval_writer = FeatureWriter(
         filename=os.path.join(FLAGS.output_dir, "eval.tf_record"),
