@@ -731,7 +731,7 @@ def convert_examples_to_features(examples, tokenizer, max_seq_length,
           # therefore we use example_index=None to avoid being used in the future.
           # The current code does not use example_index of training data.
       if is_training:
-        feat_example_index = None
+        feat_example_index = example_index
       else:
         feat_example_index = example_index
 
@@ -1363,7 +1363,7 @@ def main(_):
 
   if FLAGS.do_predict:
     eval_examples = read_squad_examples(
-        input_file=FLAGS.predict_file, is_training=False)
+        input_file=FLAGS.predict_file, is_training=False)[:50]
 
     eval_writer = FeatureWriter(
         filename=os.path.join(FLAGS.output_dir, "eval.tf_record"),

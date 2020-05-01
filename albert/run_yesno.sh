@@ -17,7 +17,7 @@ python run_yesno.py \
        --predict_file=${PREDICT_FILE} \
        --vocab_file=${ALBERT_DIR}/assets/30k-clean.vocab \
        --spm_model_file=${ALBERT_DIR}/assets/30k-clean.model \
-       --do_train=True \
+       --do_train=False \
        --do_predict=True \
        --train_batch_size=8 \
        --init_checkpoint=${ALBERT_DIR}/variables/variables
