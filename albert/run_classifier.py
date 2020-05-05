@@ -142,20 +142,12 @@ flags.DEFINE_integer(
 
 
 def main(_):
-  tf.logging.set_verbosity(tf.logging.INFO)
-
+  
   processors = {
-      "cola": classifier_utils.ColaProcessor,
-      "mnli": classifier_utils.MnliProcessor,
-      "mismnli": classifier_utils.MisMnliProcessor,
-      "mrpc": classifier_utils.MrpcProcessor,
-      "rte": classifier_utils.RteProcessor,
-      "sst-2": classifier_utils.Sst2Processor,
-      "sts-b": classifier_utils.StsbProcessor,
-      "qqp": classifier_utils.QqpProcessor,
-      "qnli": classifier_utils.QnliProcessor,
-      "wnli": classifier_utils.WnliProcessor,
-      "re": classifier_utils.REProcessor,
+     
+      "GAD": classifier_utils.REProcessor,
+      "EUADR": classifier_utils.REProcessor,
+      "CHEMPROT": classifier_utils.ChemProtProcessor,
   }
 
   if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
