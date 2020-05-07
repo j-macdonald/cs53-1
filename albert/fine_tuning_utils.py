@@ -25,7 +25,7 @@ import tensorflow.compat.v1 as tf
 import tensorflow_hub as hub
 
 
-def _create_model_from_hub(hub_module, is_training, input_ids, input_mask,
+""" def _create_model_from_hub(hub_module, is_training, input_ids, input_mask,
                            segment_ids):
   """Creates an ALBERT model from TF-Hub."""
   tags = set()
@@ -40,7 +40,7 @@ def _create_model_from_hub(hub_module, is_training, input_ids, input_mask,
       inputs=albert_inputs,
       signature="tokens",
       as_dict=True)
-  return (albert_outputs["pooled_output"], albert_outputs["sequence_output"])
+  return (albert_outputs["pooled_output"], albert_outputs["sequence_output"]) """
 
 
 def _create_model_from_scratch(albert_config, is_training, input_ids,

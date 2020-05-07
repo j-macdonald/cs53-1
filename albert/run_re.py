@@ -740,10 +740,10 @@ def main(_):
 
   processors = {
 
-      "GAD": REProcessor,
+      "gad": REProcessor,
 
-      "EUADR": REProcessor,
-      "CHEMPROT": BioBERTChemprotProcessor
+      "euadr": REProcessor,
+      "chemprot": BioBERTChemprotProcessor
   
   }
 
