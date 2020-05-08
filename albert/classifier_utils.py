@@ -166,7 +166,7 @@ class REProcessor(DataProcessor):
     return examples
 
 
-class Chemprot(DataProcessor):
+class ChemprotProcessor(DataProcessor):
   """Processor for the BioBERT data set (GLUE version)."""
 
   def get_train_examples(self, data_dir):

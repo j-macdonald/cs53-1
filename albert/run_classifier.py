@@ -147,7 +147,7 @@ def main(_):
      
       "gad": classifier_utils.REProcessor,
       "euadr": classifier_utils.REProcessor,
-      "chemprot": classifier_utils.ChemProtProcessor,
+      "chemprot": classifier_utils.ChemprotProcessor,
   }
 
   if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
