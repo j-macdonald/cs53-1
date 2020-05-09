@@ -3,7 +3,7 @@
 export BIOASQ_DIR=datasets/QA/BioASQ-
 export SQUAD_VERSION=v1.1
 export ALBERT_DIR=../large-albert
-export OUTPUT_DIR=bioasq_out_yesno
+export OUTPUT_DIR=bioasq_out_yesno/testing/2020-05-02
 rm -rf ${OUTPUT_DIR}
 mkdir -p $OUTPUT_DIR
 
@@ -17,8 +17,8 @@ python run_yesno.py \
        --predict_file=${PREDICT_FILE} \
        --vocab_file=${ALBERT_DIR}/assets/30k-clean.vocab \
        --spm_model_file=${ALBERT_DIR}/assets/30k-clean.model \
-       --do_train=True \
+       --do_train=False \
        --do_predict=True \
        --train_batch_size=8 \
-       --init_checkpoint=${ALBERT_DIR}/variables/variables
+       --init_checkpoint=bioasq_out_yesno/testing/2020-05-02_model/model.ckpt-1250 #${ALBERT_DIR}/variables/variables
 
