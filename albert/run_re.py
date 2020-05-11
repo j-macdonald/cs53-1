@@ -747,8 +747,8 @@ def main(_):
   
   }
 
-#  tokenization.validate_case_matches_checkpoint(FLAGS.do_lower_case,
- #                                               FLAGS.init_checkpoint)
+  tokenization.validate_case_matches_checkpoint(FLAGS.do_lower_case,
+                                                FLAGS.init_checkpoint)
 
   if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
     raise ValueError(
