@@ -7,6 +7,8 @@ import argparse
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--output_path', type=str,  help='')
+
+
 parser.add_argument('--answer_path', type=str,  help='')
 parser.add_argument('--task', type=str,  default="binary", help='default:binary, possible other options:{chemprot}')
 args = parser.parse_args()
@@ -47,6 +49,9 @@ if args.task == "chemprot":
     results["recall"] = r
     results["precision"] = p
 
+
 for k,v in results.items():
     print("{:11s} : {:.2%}".format(k,v))
+
+
 

@@ -154,3 +154,42 @@ python -m run_re \
   --num_train_epochs=10 \
   --save_checkpoints_steps=100 \
   --eval_steps=10
+
+  ### 
+  #Fine tuning GAD
+  #ALBERT BASE
+  #Bio Albert base on RE - GAD
+kfold = "1" 
+datadir= f"gs://cs53-1/REData/datasets/RE/GAD/{kfold}" 
+outputdir= f"gs://cs53-1/REData/outputs/GAD/Albert-Base/{kfold}"
+
+
+!python -m run_re \
+  --data_dir=$datadir \
+  --output_dir=$outputdir \
+  --albert_hub_module_handle=$model \
+  --albert_config_file=$configfile \
+  --spm_model_file=gs://cs53-1/REData/models/30k-clean.model \
+  --vocab_file=gs://cs53-1/REData/models/30k-clean.vocab \
+  --do_train \
+  --do_predict \
+  --do_lower_case \
+  --max_seq_length=128 \
+  --task_name=GAD \
+  --warmup_step=1000 \
+  --learning_rate=3e-5 \
+  --train_step=100000 \
+  --train_batch_size=32 \
+  --tpu_name=$TPU_ADDRESS \
+  --use_tpu=True \
+  --num_train_epochs=20 \
+  --save_checkpoints_steps=2500 
+
+print(f'code for fold number: {kfold}, ran at {now()}')
+
+#Eval
+# results on albert - base - GAD
+!python -m re_eval \
+ --output_path=$outputdir/test_results.tsv \
+ --answer_path=$datadir/test.tsv 
+print(f'code for fold number: {kfold}, ran at {now()}')
