@@ -280,8 +280,8 @@ def main(_):
           per_host_input_for_training=is_per_host))
 
   train_examples = None
-  num_train_steps = None
-  num_warmup_steps = None
+  num_train_steps = 0
+  num_warmup_steps = 0
   if FLAGS.do_train:
     train_examples = squad_utils.read_squad_examples(
         input_file=FLAGS.train_file, is_training=True)
@@ -463,6 +463,7 @@ def main(_):
     while global_step < num_train_steps:
       steps_and_files = {}
       filenames = tf.gfile.ListDirectory(FLAGS.output_dir)
+      print(filenames, FLAGS.output_dir)
       for filename in filenames:
         if filename.endswith(".index"):
           ckpt_name = filename[:-6]
@@ -477,7 +478,7 @@ def main(_):
       if not steps_and_files:
         tf.logging.info("found 0 file, global step: {}. Sleeping."
                         .format(global_step))
-        time.sleep(60)
+        time.sleep(1)
       else:
         for ele in sorted(steps_and_files.items()):
           step, checkpoint_path = ele

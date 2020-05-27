@@ -155,7 +155,7 @@ def read_squad_examples(input_file, is_training):
           if (len(qa["answers"]) != 1) and (not is_impossible):
             raise ValueError(
                 "For training, each question should have exactly 1 answer.")
-          if not is_impossible:
+          if not is_impossible or len(answer['text'])==0:
             answer = qa["answers"][0]
             orig_answer_text = answer["text"]
             start_position = answer["answer_start"]
@@ -224,6 +224,10 @@ def convert_examples_to_features(examples, tokenizer, max_seq_length,
   f = np.zeros((max_n, max_m), dtype=np.float32)
 
   for (example_index, example) in enumerate(examples):
+    if is_training:
+      if len(example.orig_answer_text) < 1:
+        print('Discarded {}'.format(example.qas_id))
+        continue
 
     if example_index % 100 == 0:
       tf.logging.info("Converting {}/{} pos {} neg {}".format(
