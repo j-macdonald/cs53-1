@@ -881,16 +881,17 @@ def convert_single_ner_example(ex_index, example, label_list, max_seq_length,
   # the entire model is fine-tuned.
   tokens = []
   segment_ids = []
+  label_id = []
   tokens.append("[CLS]")
-  label_ids = []
   segment_ids.append(0)
+  label_id.append(label_map["[CLS]"])
   for i,token in enumerate(tokens_a):
     tokens.append(token)
     segment_ids.append(0)
-    #label_ids.append(label_map[example.label[i].upper()])
+    label_id.append(label_ids[i])
   tokens.append("[SEP]")
   segment_ids.append(0)
-  
+  label_id.append(label_map["[SEP]"])
 
   input_ids = tokenizer.convert_tokens_to_ids(tokens)
 
@@ -903,10 +904,12 @@ def convert_single_ner_example(ex_index, example, label_list, max_seq_length,
     input_ids.append(0)
     input_mask.append(0)
     segment_ids.append(0)
+    label_id.append(0)
 
   assert len(input_ids) == max_seq_length
   assert len(input_mask) == max_seq_length
   assert len(segment_ids) == max_seq_length
+  assert len(label_id) == max_seq_length
 
 
   if ex_index < 5:
@@ -923,7 +926,7 @@ def convert_single_ner_example(ex_index, example, label_list, max_seq_length,
       input_ids=input_ids,
       input_mask=input_mask,
       segment_ids=segment_ids,
-      label_id=label_ids,
+      label_id=label_id,
       is_real_example=True)
   return feature
 
@@ -969,7 +972,16 @@ def file_based_input_fn_builder(input_file, seq_length, is_training,
   """Creates an `input_fn` closure to be passed to TPUEstimator."""
   labeltype = tf.float32 if task_name == "sts-b" else tf.int64
 
-  name_to_features = {
+  if task_name == 'ner':
+    name_to_features = {
+      "input_ids": tf.FixedLenFeature([seq_length * multiple], tf.int64),
+      "input_mask": tf.FixedLenFeature([seq_length * multiple], tf.int64),
+      "segment_ids": tf.FixedLenFeature([seq_length * multiple], tf.int64),
+      "label_ids": tf.FixedLenFeature([seq_length * multiple], labeltype),
+      "is_real_example": tf.FixedLenFeature([], tf.int64),
+  }
+  else:
+    name_to_features = {
       "input_ids": tf.FixedLenFeature([seq_length * multiple], tf.int64),
       "input_mask": tf.FixedLenFeature([seq_length * multiple], tf.int64),
       "segment_ids": tf.FixedLenFeature([seq_length * multiple], tf.int64),
